@@ -1,4 +1,4 @@
-package com.jz.learn.thread;
+package com.zj.learn.thread;
 
 public class Machine extends Thread {
 	private int i = 0;
@@ -27,6 +27,8 @@ public class Machine extends Thread {
 		Machine machine = new Machine();
 		machine.setName("machine");
 		machine.start();
+		// 一个线程只能被启动一次
+//		machine.start();
 		
 		Machine machine2 = new Machine();
 		machine2.setName("machine2");

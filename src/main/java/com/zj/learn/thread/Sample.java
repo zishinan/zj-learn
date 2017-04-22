@@ -1,4 +1,4 @@
-package com.jz.learn.thread;
+package com.zj.learn.thread;
 
 public class Sample {
 	private int a;
