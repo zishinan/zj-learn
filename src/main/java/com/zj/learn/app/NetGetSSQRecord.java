@@ -59,6 +59,7 @@ public class NetGetSSQRecord {
                 continue;
             }
             Ssq ssq = getSsq(element);
+            System.out.println(JSON.toJSONString(ssq));
             list.add(ssq);
         }
     }
@@ -79,9 +80,7 @@ public class NetGetSSQRecord {
         long sales = Long.parseLong(element.child(3).child(0).ownText().replace(op,""));
         int firstPrizeNum = Integer.parseInt(element.child(4).child(0).ownText());
         int secondPrizeNum = Integer.parseInt(element.child(5).child(0).ownText());
-        Ssq ssq = new Ssq(openTime,openNum,reds,blue,sales,firstPrizeNum,secondPrizeNum);
-        System.out.println(JSON.toJSONString(ssq));
-        return ssq;
+        return new Ssq(openTime,openNum,reds,blue,sales,firstPrizeNum,secondPrizeNum);
     }
 }
 
