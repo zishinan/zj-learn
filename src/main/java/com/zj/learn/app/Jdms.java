@@ -22,11 +22,9 @@ public class Jdms {
         try {
             loginJd("1006652872","Tf]3oei^xTA)u4B]reH8");
             getElememt(By.className("nickname"));
-            String url = "https://item.jd.com/5095848.html";//行李箱
-//            String url = "https://item.jd.com/4950364.html";//没用的
+//            String url = "https://item.jd.com/5095848.html";//行李箱
+            String url = "https://item.jd.com/4950364.html";//没用的
             itemOrder(url);
-//            String priceClass = "price J-p-"+ StringUtils.substringBetween(url,"com/",".html");
-//            System.out.println(priceClass);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,6 +44,7 @@ public class Jdms {
     private static void itemOrder(String url){
         webDriver.get(url);
         System.out.println("get :"+url);
+        "choose-btn-ko"
         WebElement webElement = getElememt(By.id("InitCartUrl"));
         String clz = webElement.getAttribute("class");
         System.out.println("是否能够抢购："+clz);
