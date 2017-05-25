@@ -43,12 +43,12 @@ public class Jdms {
         System.out.println("get :"+url);
         WebElement webElement = getElememt(By.id("InitCartUrl"));
         String clz = webElement.getAttribute("class");
-        System.out.println("dddddddddddddd"+clz);
+        System.out.println("是否能够抢购："+clz);
         int n = 0;
         while (clz.contains("disable")){
             webDriver.get(webDriver.getCurrentUrl());
             webElement = getElememt(By.id("InitCartUrl"));
-            System.out.println("dddddddddddddd"+(++n)+clz);
+            System.out.println("第"+(++n)+"次刷新是否能够抢购"+clz);
             if(!clz.contains("disable")){
                 webElement.click();
             }

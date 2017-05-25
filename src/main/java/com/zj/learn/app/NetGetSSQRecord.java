@@ -93,6 +93,9 @@ class Ssq{
     private Integer firstPrizeNum;
     private Integer secondPrizeNum;
 
+    public Ssq() {
+    }
+
     public Ssq(Date openTime, Integer openNum, String reds, Integer blue, Long sales, Integer firstPrizeNum, Integer secondPrizeNum) {
         this.openTime = openTime;
         this.openNum = openNum;
