@@ -1,6 +1,7 @@
 package com.zj.learn.app;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,14 +22,18 @@ public class Jdms {
         try {
             loginJd("1006652872","Tf]3oei^xTA)u4B]reH8");
             getElememt(By.className("nickname"));
-            itemOrder("https://item.jd.com/4950364.html");
+            String url = "https://item.jd.com/5095848.html";//行李箱
+//            String url = "https://item.jd.com/4950364.html";//没用的
+            itemOrder(url);
+//            String priceClass = "price J-p-"+ StringUtils.substringBetween(url,"com/",".html");
+//            System.out.println(priceClass);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private static WebElement getElememt(final By by) {
-        return new WebDriverWait(webDriver,1).until(
+        return new WebDriverWait(webDriver,10).until(
                 new ExpectedCondition<WebElement>() {
                     @Override
                     public WebElement apply(WebDriver input) {
@@ -45,11 +50,20 @@ public class Jdms {
         String clz = webElement.getAttribute("class");
         System.out.println("是否能够抢购："+clz);
         int n = 0;
-        while (clz.contains("disable")){
+        String price = getElememt(By.className("p-price")).getText().replace("￥","");
+        System.out.println(price);
+        double priceDouble = Double.parseDouble(price);
+        if(!clz.contains("disable") && priceDouble < 10){
+            webElement.click();
+        }
+        while (clz.contains("disable") || priceDouble > 10){
             webDriver.get(webDriver.getCurrentUrl());
             webElement = getElememt(By.id("InitCartUrl"));
+            price = getElememt(By.className("p-price")).getText().replace("￥","");
+            System.out.println(price);
+            priceDouble = Double.parseDouble(price);
             System.out.println("第"+(++n)+"次刷新是否能够抢购"+clz);
-            if(!clz.contains("disable")){
+            if(!clz.contains("disable") && priceDouble < 10){
                 webElement.click();
             }
         }
