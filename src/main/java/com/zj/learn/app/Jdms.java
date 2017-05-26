@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Jdms {
     private static WebDriver webDriver;
     static {
-        System.setProperty("webdriver.chrome.driver","E:\\myworkspace\\zj-learn\\src\\main\\resource\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","F:\\pyworkspace\\zp-learn\\target\\chromedriver.exe");
         webDriver = new ChromeDriver();
     }
     public static void main(String[] args) {
