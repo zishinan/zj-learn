@@ -13,27 +13,17 @@ public class Sudoku {
 
     public static void main(String[] args) throws Exception {
         String[] sudokuString = new String[]{
-                "732 xxx 58x",
-                "xx5 x1x 42x",
-                "xx4 xx7 xxx",
-                "3xx x6x xx9",
-                "x4x 78x 6xx",
-                "xxx xxx 14x",
-                "xxx 3x6 21x",
-                "x9x xxx xxx",
-                "xxx xx2 xxx"
+                "7xx xxx 3xx",
+                "x9x xxx 1xx",
+                "x64 xxx xxx",
+                "xxx xx8 x73",
+                "xxx xx9 xxx",
+                "51x x7x x2x",
+                "xx9 4xx xx5",
+                "xxx 36x 7xx",
+                "xx3 x52 xxx"
         };
-        sudokuString = new String[]{
-                "x39 57x x14",
-                "4xx x1x xx3",
-                "5xx x4x xxx",
-                "x6x x51 xxx",
-                "xx5 xx8 x46",
-                "xxx xx2 3xx",
-                "62x xxx xx5",
-                "xxx x6x 8xx",
-                "xxx 3xx xx7"
-        };
+
         sudoku = initFromString(sudokuString);
         printSudoku();
 
@@ -68,6 +58,7 @@ public class Sudoku {
 
     /**
      * 第二遍数据清洗
+     * TODO 获取所有组合
      *
      */
     private static void sencondClean() throws Exception {
@@ -105,7 +96,14 @@ public class Sudoku {
         }
     }
 
+    /**
+     * 思路是将一个数组未确定的可能值组合，当组合的值的个数小于等于组合的位置个数时，该组的其他位置可以排除组合值
+     * 比如:有三个位置都是【5,7,9】，那么其他位置就可以排除【5,7,9】
+     * @param cells 只包含未确定的组合
+     * @throws Exception
+     */
     private static void doProceesCells(List<Cell> cells) throws Exception {
+//        唯一可能值确定
         Map<Integer,Integer> map = new HashMap<>();
         for (Cell cell : cells) {
             if(cell.isOk()){
