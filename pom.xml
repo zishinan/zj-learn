@@ -51,6 +51,11 @@
 			<artifactId>selenium-java</artifactId>
 			<version>2.44.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.zj.util</groupId>
+			<artifactId>zj-util</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 
 		<dependency>
 			<!-- jsoup HTML parser library @ http://jsoup.org/ -->

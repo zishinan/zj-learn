@@ -21,8 +21,8 @@ public class Jdms {
         try {
             loginJd("1006652872","Tf]3oei^xTA)u4B]reH8");
             getElememt(By.className("nickname"));
-            String url = "https://item.jd.hk/1938009.html";// 尿不湿
-//            String url = "https://item.jd.com/3754287.html";//乐高 18:00
+//            String url = "https://item.jd.hk/1938009.html";// 尿不湿
+            String url = "https://item.jd.com/3754287.html";//乐高 18:00
             itemOrder(url);
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,7 +31,7 @@ public class Jdms {
 
     private static WebElement getElememt(final By by) {
         try {
-            return new WebDriverWait(webDriver,10).until(
+            return new WebDriverWait(webDriver,1).until(
                     new ExpectedCondition<WebElement>() {
                         @Override
                         public WebElement apply(WebDriver input) {
@@ -46,7 +46,9 @@ public class Jdms {
     }
 
     private static void itemOrder(String url){
+        int n = 0;
         while (true){
+            System.out.println(System.currentTimeMillis()+" 第"+(++n)+"次抢购");
             webDriver.get(url);
             WebElement webElement = getKoWebElememt();
             if(null != webElement){
