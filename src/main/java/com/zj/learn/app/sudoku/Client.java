@@ -11,22 +11,21 @@ import java.util.List;
 public class Client {
     public static void main(String[] args) {
         String[] sudokuString = new String[]{
-                "7xx xxx 3xx",
-                "x9x xxx 1xx",
-                "x64 xxx xxx",
-                "xxx xx8 x73",
-                "xxx xx9 xxx",
-                "51x x73 x2x",
-                "xx9 4xx xx5",
-                "xxx 36x 7xx",
-                "xx3 x52 xxx"
+                "x9x x2x 7xx",
+                "x8x 1x4 xx6",
+                "xxx 5xx xxx",
+                "xx3 xx6 x4x",
+                "xxx xx9 2xx",
+                "4xx xxx xxx",
+                "x2x xxx xxx",
+                "576 xxx 4x1",
+                "xxx x8x xx3"
         };
         Sudoku sudoku = new Sudoku(sudokuString);
-        sudoku.printSudoku();
         List<SudoKuManager> managers = ManagerFactory.getManagers();
-        int totalNum;
-        do {
-            totalNum = sudoku.getTotalNum();
+        while (true){
+            sudoku.printSudoku();
+            int totalNum = sudoku.getTotalNum();
             for (SudoKuManager manager : managers) {
                 manager.calculate(sudoku);
                 if(sudoku.isOk()){
@@ -36,7 +35,10 @@ public class Client {
                     break;
                 }
             }
-        }while (totalNum == sudoku.getTotalNum());
+            if(totalNum == sudoku.getTotalNum()){
+                break;
+            }
+        }
         sudoku.printSudoku();
     }
 }

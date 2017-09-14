@@ -1,5 +1,8 @@
 package com.zj.learn.app.sudoku;
 
+import com.zj.learn.app.sudoku.manager.OnlyOneManager;
+import com.zj.learn.app.sudoku.manager.SimpleManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +16,8 @@ public class ManagerFactory {
     public static List<SudoKuManager> getManagers(){
         List<SudoKuManager> managers = new ArrayList<>();
         managers.add(new SimpleManager());
-        managers.add(new EasyProcessManager());
+        managers.add(new OnlyOneManager());
+//        managers.add(new ExcludeManager());
         return managers;
     }
 }

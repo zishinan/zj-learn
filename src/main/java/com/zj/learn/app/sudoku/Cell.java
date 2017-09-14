@@ -57,6 +57,11 @@ public class Cell {
             this.getValue().remove(integer);
         }
     }
+    public void removeVals(Set<Integer> nums){
+        for (Integer integer : nums) {
+            this.getValue().remove(integer);
+        }
+    }
 
     public int getOkVal(){
         for (Integer integer : this.value) {

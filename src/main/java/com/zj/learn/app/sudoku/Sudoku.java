@@ -47,6 +47,34 @@ public class Sudoku {
         }
     }
 
+    public void printRow(int n){
+        List<Cell> cells = rows.get(n);
+        for (Cell cell : cells) {
+            System.out.print(cell.toString());
+        }
+        System.out.println("");
+    }
+
+    public void printBlock(int n){
+        List<Cell> cells = blocks.get(n);
+        for (int i = 0; i < cells.size(); i++) {
+            System.out.print(cells.get(i).toString());
+            if((i+1)%3 == 0){
+                System.out.print("\t||\t");
+                System.out.println();
+            }
+        }
+        System.out.println("");
+    }
+
+    public void printCol(int n){
+        List<Cell> cells = cols.get(n);
+        for (Cell cell : cells) {
+            System.out.println(cell.toString());
+        }
+        System.out.println();
+    }
+
     public boolean isAllRight() {
         if(!isOk()){
             return false;
@@ -92,23 +120,21 @@ public class Sudoku {
                 totalNum = totalNum + sudoku[i][j].getValue().size();
                 row.add(sudoku[i][j]);
                 col.add(sudoku[j][i]);
+                addBlockMap(blocks,sudoku[i][j]);
             }
             rows.put(i,row);
             cols.put(i,col);
         }
-        int index = 0;
-        for (int i = 0; i < 9; i = i+3) {
-            for (int j = 0; j < 9; j = j+3) {
-                List<Cell> cells = new ArrayList<>();
-                for (int k = 0; k < 3; k++) {
-                    for (int l = 0; l < 3; l++) {
-                        Cell cell = sudoku[i+k][j+l];
-                        cells.add(cell);
-                    }
-                }
-                blocks.put(index,cells);
-                index++;
-            }
+    }
+
+    private void addBlockMap(Map<Integer, List<Cell>> blockMap, Cell cell) {
+        int index = getBlockIndex(cell.getX(),cell.getY());
+        if(blockMap.containsKey(index)){
+            blockMap.get(index).add(cell);
+        }else {
+            List<Cell> cells = new ArrayList<>();
+            cells.add(cell);
+            blockMap.put(index,cells);
         }
     }
 
@@ -198,7 +224,7 @@ public class Sudoku {
         return blocks.get(index);
     }
 
-    private int getBlockIndex(int x, int y) {
+    private static int getBlockIndex(int x, int y) {
         int index;
         if(x < 3){
             if(y < 3){

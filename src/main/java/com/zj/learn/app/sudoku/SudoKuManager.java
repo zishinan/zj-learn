@@ -1,5 +1,7 @@
 package com.zj.learn.app.sudoku;
 
+import java.util.List;
+
 /**
  * @author Mr. xi.yang<br/>
  * @version V1.0 <br/>
@@ -7,14 +9,28 @@ package com.zj.learn.app.sudoku;
  * @date 2017-09-05 下午 4:31 <br/>
  */
 public abstract class SudoKuManager {
-    protected Sudoku sudoku;
     public void calculate(Sudoku sudoku){
-        this.sudoku = sudoku;
-        int totalNum;
-        do {
-            totalNum = sudoku.getTotalNum();
-            doCalculate(sudoku);
-        }while (totalNum == sudoku.getTotalNum());
+        for (int i = 0; i < 9; i++) {
+            if(!allOk(sudoku.getRows().get(i))){
+                doCalculate(sudoku.getRows().get(i));
+            }
+            if(!allOk(sudoku.getCols().get(i))){
+                doCalculate(sudoku.getCols().get(i));
+            }
+            if(!allOk(sudoku.getBlocks().get(i))){
+                doCalculate(sudoku.getBlocks().get(i));
+            }
+        }
     }
-    protected abstract void doCalculate(Sudoku sudoku);
+
+    private boolean allOk(List<Cell> cells) {
+        for (Cell cell : cells) {
+            if(!cell.isOk()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected abstract void doCalculate(List<Cell> cells);
 }
